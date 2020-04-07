@@ -10,11 +10,31 @@ package projetodanilo;
  * @author henri
  */
 public class Hospital {
-    private int cor;
+    private int x, y, cor;
 
-    public Hospital(int cor) {
+    public Hospital(int x, int y, int cor) {
+        this.x = x;
+        this.y = y;
         this.cor = cor;
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    
 
     public int getCor() {
         return cor;

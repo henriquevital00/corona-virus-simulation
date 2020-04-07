@@ -23,13 +23,16 @@ public class ProjetoDanilo {
         
         Mundo mundo = new Mundo();
         mundo.createMap();
-        mundo.setPeople(10, 5);
+        mundo.createHospital();
+        mundo.setPeople(0, 30);
         while(true) {
-            time++;
+            
             mundo.desenhaMundo(time);
             mundo.changePosition();
             mundo.colision();
-            //mundo.checkIfDie();
+            time++;
+            mundo.updateMorte();
+            mundo.checkIfDie();
             try {
                 Thread.currentThread().sleep(1000); // 1 segundo
             } catch (InterruptedException ex) {

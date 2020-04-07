@@ -25,7 +25,7 @@ public class Virus {
     }
     
     public void updateTimeToDie(){
-        this.timeToDie = this.timeToDie++;
+        this.timeToDie += 1;
     }
     
     

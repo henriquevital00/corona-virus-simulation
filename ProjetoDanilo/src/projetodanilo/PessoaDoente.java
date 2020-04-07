@@ -12,12 +12,14 @@ import java.util.concurrent.ThreadLocalRandom;
 public class PessoaDoente extends Pessoa{
     public Virus virus;
     
-    public PessoaDoente(int cor) {
+    public PessoaDoente(int cor, Virus virus) {
         super(cor);
+        this.virus = virus;
     }
 
-    public PessoaDoente(int x, int y, int cor) {
+    public PessoaDoente(int x, int y, int cor, Virus virus) {
         super(x, y, cor);
+        this.virus = virus;
     }
     
     public void updateTimeToDie(){
@@ -27,13 +29,6 @@ public class PessoaDoente extends Pessoa{
     public int getTimeToDie(){
         return virus.getTimeToDie();
     }
-    
-    public void setVirus(Virus virus) {
-        this.virus = virus;
-    }
-
-    
-
     
     @Override
     public int[] mover(int x, int y) {

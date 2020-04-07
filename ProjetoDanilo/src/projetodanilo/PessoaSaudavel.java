@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author henri
  */
 public class PessoaSaudavel extends Pessoa{
-
+    
     public PessoaSaudavel(int cor) {
         super(cor);
     }
