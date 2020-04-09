@@ -22,17 +22,16 @@ public class ProjetoDanilo {
         Virus virus = new Virus(0);
         
         Mundo mundo = new Mundo();
-        mundo.createMap();
         mundo.createHospital();
-        mundo.setPeople(0, 30);
+        mundo.createMap();
+        mundo.setPeople(100, 1);
         while(true) {
-            
             mundo.desenhaMundo(time);
             mundo.changePosition();
             mundo.colision();
-            time++;
             mundo.updateMorte();
             mundo.checkIfDie();
+            time++;
             try {
                 Thread.currentThread().sleep(1000); // 1 segundo
             } catch (InterruptedException ex) {

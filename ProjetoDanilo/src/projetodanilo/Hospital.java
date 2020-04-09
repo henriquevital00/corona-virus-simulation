@@ -11,7 +11,7 @@ package projetodanilo;
  */
 public class Hospital {
     private int x, y, cor;
-
+    
     public Hospital(int x, int y, int cor) {
         this.x = x;
         this.y = y;
