@@ -13,9 +13,9 @@ import java.util.Iterator;
  * @author henri
  */
 public class Mundo {
-    private ArrayList<PessoaSaudavel> saudaveis;
-    private ArrayList<PessoaDoente> doentes;
-    private ArrayList<Hospital> hospitais;
+    private ArrayList<PessoaSaudavel> health;
+    private ArrayList<PessoaDoente> sick;
+    private ArrayList<Hospital> hospitals;
     public Virus virus;
     private static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
     private static final String ANSI_RED_BACKGROUND = "\u001B[41m";
@@ -36,7 +36,7 @@ public class Mundo {
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
-    public int[][] mapa = {
+    public int[][] map = {
         {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -74,21 +74,21 @@ public class Mundo {
     
     
     public void createMap(){
-        for (int i=0; i< mapa.length; i++){
-            worldMap[i] = mapa[i].clone();
+        for (int i=0; i< map.length; i++){
+            worldMap[i] = map[i].clone();
         }
     }
     
     public void createHospital(){
-        hospitais = generateHospitalObjects(hospitais);
-        for (int i=0; i<hospitais.size(); i++){
-            mapa[hospitais.get(i).getX()][hospitais.get(i).getY()] = hospitais.get(i).getCor();
+        hospitals = generateHospitalObjects(hospitals);
+        for (int i=0; i<hospitals.size(); i++){
+            map[hospitals.get(i).getX()][hospitals.get(i).getY()] = hospitals.get(i).getCor();
         }
     }
     
     public Boolean checkHospital(int x, int y){
-        for (int i=0; i<hospitais.size(); i++){
-            if (x == hospitais.get(i).getX() && y == hospitais.get(i).getY()){
+        for (int i=0; i<hospitals.size(); i++){
+            if (x == hospitals.get(i).getX() && y == hospitals.get(i).getY()){
                 return true;
             }
         }
@@ -115,68 +115,68 @@ public class Mundo {
         return array;
     }
 
-    public void setPeople(int saudavel, int doente){
-        for (int i=0; i<saudavel; i++){
-            saudaveis.add(new PessoaSaudavel(5, mapa));
-            worldMap[saudaveis.get(i).getX()][saudaveis.get(i).getY()] = saudaveis.get(i).getCor();
+    public void setPeople(int healthPeople, int sickPeople){
+        for (int i=0; i<healthPeople; i++){
+            health.add(new PessoaSaudavel(5, map));
+            worldMap[health.get(i).getX()][health.get(i).getY()] = health.get(i).getCor();
         }
-        for (int i=0; i<doente; i++){
+        for (int i=0; i<sickPeople; i++){
             virus = new Virus(0);
-            doentes.add(new PessoaDoente(6, mapa, virus));
-            worldMap[doentes.get(i).getX()][doentes.get(i).getY()] = doentes.get(i).getCor();
+            sick.add(new PessoaDoente(6, map, virus));
+            worldMap[sick.get(i).getX()][sick.get(i).getY()] = sick.get(i).getCor();
         }
     }
     
     public void changePosition(){
         createMap();
-        for (int i=0; i<saudaveis.size(); i++){
-            int x = saudaveis.get(i).getX();
-            int y = saudaveis.get(i).getY();
-            int vetor[] = saudaveis.get(i).mover(x, y);
-            saudaveis.get(i).setX(vetor[0]);
-            saudaveis.get(i).setY(vetor[1]);
-            worldMap[saudaveis.get(i).getX()][saudaveis.get(i).getY()] = 5;
+        for (int i=0; i<health.size(); i++){
+            int x = health.get(i).getX();
+            int y = health.get(i).getY();
+            int vetor[] = health.get(i).mover(x, y);
+            health.get(i).setX(vetor[0]);
+            health.get(i).setY(vetor[1]);
+            worldMap[health.get(i).getX()][health.get(i).getY()] = 5;
         }
-        for (int i=0; i<doentes.size(); i++){
-            int x = doentes.get(i).getX();
-            int y = doentes.get(i).getY();
-            int vetor[] = doentes.get(i).mover(x, y);
-            doentes.get(i).setX(vetor[0]);
-            doentes.get(i).setY(vetor[1]);
-            worldMap[doentes.get(i).getX()][doentes.get(i).getY()] = 6;
+        for (int i=0; i<sick.size(); i++){
+            int x = sick.get(i).getX();
+            int y = sick.get(i).getY();
+            int vetor[] = sick.get(i).mover(x, y);
+            sick.get(i).setX(vetor[0]);
+            sick.get(i).setY(vetor[1]);
+            worldMap[sick.get(i).getX()][sick.get(i).getY()] = 6;
         }
     }
 
     public void colision(){
-        for (int i=0; i < doentes.size(); i++){
-            int xDoente = doentes.get(i).getX();
-            int yDoente = doentes.get(i).getY();
-            for (int j=0; j < saudaveis.size(); j++){
-                int xSaudavel = saudaveis.get(j).getX();
-                int ySaudavel = saudaveis.get(j).getY();
-                if (xDoente == xSaudavel && yDoente == ySaudavel){
+        for (int i=0; i < sick.size(); i++){
+            int xSick = sick.get(i).getX();
+            int ySick = sick.get(i).getY();
+            for (int j=0; j < health.size(); j++){
+                int xHealth = health.get(j).getX();
+                int yHealth = health.get(j).getY();
+                if (xSick == xHealth && ySick == yHealth){
                     virus = new Virus(0);
-                    doentes.add(new PessoaDoente(xSaudavel, ySaudavel, 6, virus));
-                    worldMap[xSaudavel][ySaudavel] = 6;
-                    saudaveis.remove(j);
+                    sick.add(new PessoaDoente(xHealth, yHealth, 6, virus));
+                    worldMap[xHealth][yHealth] = 6;
+                    health.remove(j);
                 }
             }
-            if ( checkHospital(xDoente, yDoente) == true ){
-                saudaveis.add(new PessoaSaudavel(xDoente, yDoente, 5));
-                doentes.remove(i);
-                worldMap[xDoente][yDoente] = 5;
+            if ( checkHospital(xSick, ySick) == true ){
+                health.add(new PessoaSaudavel(xSick, ySick, 5));
+                sick.remove(i);
+                worldMap[xSick][ySick] = 5;
             }
         }
     }
     
     public Mundo() {
-        this.saudaveis = new ArrayList<>();
-        this.doentes =  new ArrayList<>();
-        this.hospitais =  new ArrayList<>();
+        this.health = new ArrayList<>();
+        this.sick =  new ArrayList<>();
+        this.hospitals =  new ArrayList<>();
     }    
     
     public void printInformations(int time){
-        int total = saudaveis.size() + doentes.size();
+        int total = health.size() + sick.size();
         System.out.println("===================================================================================================================");
         System.out.println(ANSI_RESET + ANSI_GREEN + " .d8888b.  .d88888b. 8888888b.  .d88888b. 888b    888       d8888888     88888888888888888b. 888     888 .d8888b.  ");
         System.out.println(ANSI_GREEN + "d88P  Y88bd88P\" \"Y88b888   Y88bd88P\" \"Y88b8888b   888      d88888888     888  888  888   Y88b888     888d88P  Y88b ");
@@ -187,20 +187,28 @@ public class Mundo {
         System.out.println(ANSI_GREEN + "Y88b  d88PY88b. .d88P888  T88b Y88b. .d88P888   Y8888 d8888888888   Y888P     888  888  T88b Y88b. .d88PY88b  d88P ");
         System.out.println(ANSI_GREEN + " \"Y8888P\"  \"Y88888P\" 888   T88b \"Y88888P\" 888    Y888d88P     888    Y8P    8888888888   T88b \"Y88888P\"  \"Y8888P\"  " + ANSI_RESET);
         System.out.println("===================================================================================================================");
-        System.out.println("\t\tTempo de Simulação: " + time);
-        System.out.printf(ANSI_BLUE_BACKGROUND + " " + ANSI_RESET + ANSI_BLUE + " Saudáveis: " + saudaveis.size() + ANSI_RESET);
-        System.out.println("                " + ANSI_PURPLE_BACKGROUND + " " + ANSI_RESET + ANSI_PURPLE + "Doentes: " + doentes.size() + ANSI_RESET);
-        System.out.println("Total de pesssoas: " + total);
+        System.out.println("\t\tSimulation time: " + time);
+        System.out.printf(ANSI_BLUE_BACKGROUND + " " + ANSI_RESET + ANSI_BLUE + " Health: " + health.size() + ANSI_RESET);
+        System.out.println("                " + ANSI_PURPLE_BACKGROUND + " " + ANSI_RESET + ANSI_PURPLE + "Sick: " + sick.size() + ANSI_RESET);
+        System.out.println("Total people: " + total);
+    }
+    
+    public int getHealthPeople(){
+        return health.size();
+    }
+    
+    public int getSickPeople(){
+        return sick.size();
     }
     
     public void updateMorte(){
-        for (int i=0; i < doentes.size(); i++){
-            doentes.get(i).virus.updateTimeToDie();
+        for (int i=0; i < sick.size(); i++){
+            sick.get(i).virus.updateTimeToDie();
         }
     }
     
     public void checkIfDie(){
-        Iterator<PessoaDoente> itr = doentes.iterator();
+        Iterator<PessoaDoente> itr = sick.iterator();
         while (itr.hasNext()) {
             PessoaDoente obj = itr.next();
             if (obj.getTimeToDie() == 30) {
