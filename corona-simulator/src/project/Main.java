@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projetodanilo;
+package project;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  *
  * @author henri
  */
-public class ProjetoDanilo {
+public class Main {
 
     /**
      * @param args the command line arguments
@@ -20,7 +20,7 @@ public class ProjetoDanilo {
     public static void main(String[] args) {
         int time=0;
         Virus virus = new Virus(0);
-        
+
         Mundo mundo = new Mundo();
         mundo.createHospital();
         mundo.createMap();
@@ -35,9 +35,9 @@ public class ProjetoDanilo {
             try {
                 Thread.currentThread().sleep(1000); // 1 segundo
             } catch (InterruptedException ex) {
-                Logger.getLogger(ProjetoDanilo.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
-    
+
 }
