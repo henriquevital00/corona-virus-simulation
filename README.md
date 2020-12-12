@@ -1,13 +1,15 @@
 # corona-virus-simulation
-This repository is a propagation simulator of corona virus, using colors to represent health peoples and sick peoples that are infected with corona virus, the sick peoples are heal if enter the hospital.
 
-* [Description](#description)
-* [How to run](#how-to-run)
-* [Simulation](#simulation)
-* [Youtube](#youtube)
+**This repository is a propagation simulator of corona virus, using colors to represent health peoples and sick peoples that are infected with corona virus, the sick peoples are heal if enter the hospital.**
+
+  * [Description](#description)
+  * [How to run](#how-to-run)
+  * [Simulation](#simulation)
+  * [Youtube](#youtube)
 
 ## Description
 In the start of the simulation will be asked to the user the quantity of health and sick people to simulate the corona virus infection, after this the simulation will start.
+
 * **sick people infect health people if they touch health people**
 * **sick peopple are cured if the entter in the hospital**
 * **sick people die 30 seconds after being infected**
